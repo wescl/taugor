@@ -10,7 +10,7 @@ const App = () => {
     <Router>
       <>
         <Row>
-          <Col size={2}>
+          <Col size={2}> 
             <Sidebar />
           </Col>
           <Col size={10}>
