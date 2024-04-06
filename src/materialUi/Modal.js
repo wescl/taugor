@@ -1,9 +1,10 @@
 import React, { useState, useRef } from 'react';
-import { Modal, makeStyles, Backdrop, Fade, IconButton } from '@material-ui/core';
+import { Modal, Backdrop, Fade, IconButton, Typography, Box } from '@mui/material';
 import { IoMdClose } from "react-icons/io";
+import { styled } from '@mui/system';
 import './Modal.scss';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = styled((theme) => ({
   modal: {
     display: 'flex',
     alignItems: 'center',
@@ -43,15 +44,15 @@ const ModalComponent = ({ isOpen, onClose, children, maxWidth }) => {
       ref={modalRef}
     >
       <Fade in={isOpen}>
-        <div className={classes.paper}>
-
+        <Box className={classes.paper}>
+          <p style={{ margin: '.8em 0', color: 'transparent' }}>.</p>
           <div id="transition-modal-description" className={`modal-container ${maxWidth}`}>
             <div aria-label="close" className="close-button" onClick={onClose}>
               <IoMdClose />
             </div>
             {children}
           </div>
-        </div>
+        </Box>
       </Fade>
     </Modal>
   );
