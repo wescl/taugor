@@ -1,0 +1,61 @@
+.login-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    z-index: 999;
+    background: var(--background-light);
+
+    .email-senha{
+        position: absolute;
+        left: 2em;
+        top: 2em;
+    }
+
+    .login-form {
+        position: relative;
+        padding: 50px;
+        border-radius: 8px;
+        max-width: 600px;
+        width: 100%;
+        border: 1px solid var(--secondary-light);
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+        .logo-img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1em 0 2em 0;
+
+            img {
+                width: 290px;
+                height: auto;
+            }
+        }
+
+        .login-input {
+            width: 300px;
+            height: 40px;
+            margin-bottom: 15px;
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        .error-message {
+            position: absolute;
+            text-align: center;
+            left: 0;
+            bottom: 20%;
+            font-size: 14px;
+            width: 100%;
+            color: red;
+        }
+
+    }
+
+}

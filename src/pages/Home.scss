@@ -1,0 +1,19 @@
+.sair {
+    position: absolute;
+    right: .5em;
+    top: .5em;
+    background-color: transparent;
+    font-size: 20px;
+    border: none;
+    color: black;
+    padding: 8px 10px;
+    letter-spacing: 1px;
+    width: 70px;
+    cursor: pointer;
+    transition: all .3s;
+    z-index: 3;
+
+    &:hover {
+        opacity: 80%;
+    }
+}

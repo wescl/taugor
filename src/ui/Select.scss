@@ -1,0 +1,91 @@
+.select-wrapper {
+  position: relative;
+  text-align: start;
+  transition: all 0.2s;
+  margin-bottom: 2.4em;
+}
+
+.selected {
+  box-sizing: border-box;
+  cursor: pointer;
+  padding: 10px 12px;
+  width: 100%;
+  border-bottom: 2px solid var(--secondary-light);
+  border-radius: 1px;
+  transition: all 0.2s;
+  height: 45px;
+  font-size: 15px;
+
+  &.selected-error {
+    border-bottom: 2px solid red;
+  }
+}
+
+.label-select {
+  position: absolute;
+  opacity: 80%;
+  font-size: 16px;
+}
+
+.focused {
+  .label-select {
+    position: absolute;
+    top: -11px;
+    left: 12px;
+    font-size: 14px;
+    opacity: 70%;
+  }
+}
+
+.arrow {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  transition: all 0.2s;
+  font-size: 17px;
+  opacity: 70%;
+}
+
+.arrow.open {
+  transform: translateY(-50%) rotate(-180deg);
+  transition: all 0.2s;
+}
+
+.options {
+  width: 99.7%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: calc(40% + 5px);
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  z-index: -1;
+  opacity: 0;
+  transition: all .2s;
+  filter: blur(2px);
+}
+
+.options.open-options {
+  z-index: 1;
+  opacity: 1;
+  transition: all .2s;
+  top: calc(100% + 5px);
+  filter: blur(0px);
+}
+
+.options li {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--secondary-light);
+  transition: all 0.2s;
+}
+
+.options li:hover {
+  background-color: #f0f0f0;
+  transition: all 0.2s;
+}
