@@ -24,7 +24,7 @@ const ItemFuncionario = ({ contato, funcionarios, handleExcluirFuncionario, hand
         <>
             <div className="item-funcionario" key={contato.id}>
                 <div className='item-img'>
-                    <img src={contato.foto} />
+                    <img src={contato.foto} alt='img'/>
                 </div>
 
                 <div className='item-info'>

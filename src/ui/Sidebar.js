@@ -4,6 +4,7 @@ import logo from '../assets/marca-taugor.png'
 import { MdDashboard } from "react-icons/md";
 import { IoMdPerson } from "react-icons/io";
 import { CgNotes } from "react-icons/cg";
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
@@ -12,9 +13,9 @@ const Sidebar = () => {
         <img src={logo}></img>
       </div>
       <ul className="sidebar-menu">
-        <li><a href="#"><i><MdDashboard /></i> Dashboard</a></li>
-        <li><a href="#"><i><IoMdPerson /></i> Funcionários</a></li>
-        <li><a href="#"><i><CgNotes /></i> Observações</a></li>
+        <li><Link to="painel"><i><MdDashboard /></i> Dashboard</Link></li>
+        <li><Link to=""><i><IoMdPerson /></i> Funcionários</Link></li>
+        <li><Link to="observações"><i><CgNotes /></i> Observações</Link></li>
       </ul>
     </div>
   );
