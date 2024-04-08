@@ -11,8 +11,7 @@ import Title from '../ui/Title';
 import { FaPenClip } from "react-icons/fa6";
 import InputPhone from '../ui/InputPhone';
 import Button from '../ui/Button';
-import CustomSnackbar from '../materialUi/CustomSnackbar';
-
+import './FormContato.scss'
 const FormContato = ({ uid, onModalClose, contatoExistente, funcionarioExistente, onCancel, onFormSubmit, onInputBlur }) => {
 
     const [nome, setNome] = useState(contatoExistente ? contatoExistente.nome : '');
@@ -29,7 +28,8 @@ const FormContato = ({ uid, onModalClose, contatoExistente, funcionarioExistente
     const [selectedFile, setSelectedFile] = useState(null);
     const [errorMessage, setErrorMessage] = useState({});
     const [isLoading, setIsLoading] = useState(false);
-    const [openSnackbar, setOpenSnackbar] = useState(false);
+
+    const [meuArray, setMeuArray] = useState([]);
 
     const handleProfilePictureChange = (file) => {
         setImagemFile(file);
@@ -80,12 +80,15 @@ const FormContato = ({ uid, onModalClose, contatoExistente, funcionarioExistente
         setErrorMessage(errors);
 
         if (Object.keys(errors).length > 0) {
+            setIsLoading(false);
             return;
         }
 
         try {
             let fotoPerfilUrl = fotoPerfil;
-            if (imagemFile) {
+            if (!imagemFile && !fotoPerfil) {
+                fotoPerfilUrl = 'https://firebasestorage.googleapis.com/v0/b/taugor-aa560.appspot.com/o/tg.png?alt=media&token=eba9bd5f-cda2-4170-ba9d-c68efc31ce25';
+            } else if (imagemFile) {
                 const storage = getStorage();
                 const fileRef = storageRef(storage, `profilePictures/${imagemFile.name}`);
                 await uploadBytes(fileRef, imagemFile);
@@ -103,16 +106,16 @@ const FormContato = ({ uid, onModalClose, contatoExistente, funcionarioExistente
                 uid
             };
 
+            setMeuArray([novoContato])
+
             onFormSubmit(novoContato);
 
             if (contatoExistente) {
                 await atualizarContato(contatoExistente.id, novoContato);
                 setMostrarMensagem(true);
-                setOpenSnackbar(true);
             } else {
                 const id = await adicionarContato(novoContato);
                 setIdDoDocumento(id);
-                setOpenSnackbar(true);
             }
         } catch (error) {
             console.error("Erro ao enviar imagem:", error);
@@ -137,56 +140,91 @@ const FormContato = ({ uid, onModalClose, contatoExistente, funcionarioExistente
     const optionsSexo = ['Masculino', 'Feminino', 'Outro'];
 
     return (
-        <div>
-            <CustomSnackbar open={openSnackbar} onClose={() => setOpenSnackbar(false)} message="Sucesso!" severity="success" />
+        <>
             {mostrarMensagem ? (
-                <FormFuncionario onModalClose={onModalClose} onFormSubmit={onFormSubmit} onInputBlur={onInputBlur} funcionarioExistente={funcionarioExistente} id_contato={funcionarioExistente ? funcionarioExistente.id_contato : null} />
+                <FormFuncionario array={meuArray} onModalClose={onModalClose} onFormSubmit={onFormSubmit} onInputBlur={onInputBlur} funcionarioExistente={funcionarioExistente} id_contato={funcionarioExistente ? funcionarioExistente.id_contato : null} />
             ) : idDoDocumento ? (
                 <div>
-                    <FormFuncionario onModalClose={onModalClose} onFormSubmit={onFormSubmit} onInputBlur={onInputBlur} id_contato={idDoDocumento} />
+                    <FormFuncionario array={meuArray} onModalClose={onModalClose} onFormSubmit={onFormSubmit} onInputBlur={onInputBlur} id_contato={idDoDocumento} />
                 </div>
             ) : (
                 <>
                     <Title title="Preencha os dados de contato" icon={<FaPenClip />} />
                     <form className='form-contato' onSubmit={handleSubmit}>
-                        <Row>
-                            <Col size={7}>
-                                <Input
-                                    type="text"
-                                    label="Nome"
-                                    placeholder="Nome"
-                                    value={nome}
-                                    inputDate={true}
-                                    onChange={(e) => setNome(e.target.value)}
-                                    onBlur={(value) => onInputBlur("nome", value)}
-                                    errorMessage={errorMessage.nome}
-                                />
+                        <div className='img-right'>
+                            <Row>
+                                <Col>
+                                    <Input
+                                        type="text"
+                                        label="Nome"
+                                        placeholder="Nome"
+                                        value={nome}
+                                        inputDate={true}
+                                        onChange={(e) => setNome(e.target.value)}
+                                        onBlur={(value) => onInputBlur("nome", value)}
+                                        errorMessage={errorMessage.nome}
+                                    />
 
-                                <Input
-                                    type="text"
-                                    label="Sobrenome"
-                                    placeholder="Sobrenome"
-                                    value={sobrenome}
-                                    onChange={(e) => setSobrenome(e.target.value)}
-                                    onBlur={(value) => onInputBlur("sobrenome", value)}
-                                    errorMessage={errorMessage.sobrenome}
-                                />
+                                    <Input
+                                        type="text"
+                                        label="Sobrenome"
+                                        placeholder="Sobrenome"
+                                        value={sobrenome}
+                                        onChange={(e) => setSobrenome(e.target.value)}
+                                        onBlur={(value) => onInputBlur("sobrenome", value)}
+                                        errorMessage={errorMessage.sobrenome}
+                                    />
 
-                                <Select
-                                    options={optionsSexo}
-                                    value={sexo}
-                                    label="Sexo"
-                                    onChange={(selectedOption) => setSexo(selectedOption)}
-                                    onBlur={(value) => onInputBlur("sexo", value)}
-                                    errorMessage={errorMessage.sexo}
-                                />
-                            </Col>
+                                    <Select
+                                        options={optionsSexo}
+                                        value={sexo}
+                                        label="Sexo"
+                                        onChange={(selectedOption) => setSexo(selectedOption)}
+                                        onBlur={(value) => onInputBlur("sexo", value)}
+                                        errorMessage={errorMessage.sexo}
+                                    />
+                                </Col>
 
-                            <Col size={5}>
-                                <FileInput fotoPerfil={fotoPerfil} onChange={handleProfilePictureChange} />
-                            </Col>
+                                <Col>
+                                    <FileInput fotoPerfil={fotoPerfil} onChange={handleProfilePictureChange} />
+                                </Col>
 
-                        </Row>
+                            </Row>
+                        </div>
+
+                        <div className='img-top'>
+                            <FileInput fotoPerfil={fotoPerfil} onChange={handleProfilePictureChange} />
+
+                            <Input
+                                type="text"
+                                label="Nome"
+                                placeholder="Nome"
+                                value={nome}
+                                inputDate={true}
+                                onChange={(e) => setNome(e.target.value)}
+                                onBlur={(value) => onInputBlur("nome", value)}
+                                errorMessage={errorMessage.nome}
+                            />
+
+                            <Input
+                                type="text"
+                                label="Sobrenome"
+                                placeholder="Sobrenome"
+                                value={sobrenome}
+                                onChange={(e) => setSobrenome(e.target.value)}
+                                onBlur={(value) => onInputBlur("sobrenome", value)}
+                                errorMessage={errorMessage.sobrenome}
+                            />
+
+                            <Select
+                                options={optionsSexo}
+                                value={sexo}
+                                label="Sexo"
+                                onChange={(selectedOption) => setSexo(selectedOption)}
+                                onBlur={(value) => onInputBlur("sexo", value)}
+                                errorMessage={errorMessage.sexo}
+                            />
+                        </div>
 
                         <Input
                             type="text"
@@ -238,7 +276,7 @@ const FormContato = ({ uid, onModalClose, contatoExistente, funcionarioExistente
                     </form>
                 </>
             )}
-        </div>
+        </>
     );
 };
 

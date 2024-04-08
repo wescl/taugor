@@ -1,0 +1,14 @@
+.oct-tabs {
+  display: none;
+  height: 10vh;
+}
+
+@media (max-width: 1000px) {
+  .oct-sidebar {
+    display: none;
+  }
+
+  .oct-tabs {
+    display: block;
+  }
+}

@@ -23,7 +23,7 @@ const InfoFuncionario = ({ contato, funcionarios, handleExcluirFuncionario, hand
                     <div className='buttons'>
                         <button className='button' onClick={() => handleExcluirFuncionario(funcionario.id, contato.id)}><i><MdDelete /></i> Excluir</button>
                         <button className='button' onClick={() => handleOpenModalEdicao(funcionario)}><i><MdEdit /></i> Editar</button>
-                        <button className='button'>{handleDownloadPDF(funcionario, contato)}<i><FaFilePdf /></i> Baixar PDF</button>
+                        <button className='button'>{handleDownloadPDF(funcionario, contato)}<i><FaFilePdf /></i> Pdf</button>
                     </div>
                 </>
             ))}

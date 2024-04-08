@@ -28,12 +28,9 @@ const Login = () => {
   const handleSignIn = async () => {
     try {
       setLoading(true);
-
-      // Limpar mensagens de erro
       setErrors({});
       setErrorMessage('');
 
-      // Validar email e senha
       const newErrors = {};
       if (!validateEmail(email)) {
         newErrors.email = 'Email inválido. ';
@@ -81,45 +78,51 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
+    <>
+
       <div className="email-senha">
         <p>Email: wescley@gmail.com</p>
         <p>Senha: 123456</p>
       </div>
-      <div className='login-form'>
-        <div className='logo-img'>
-          <img src={logo} alt="Taugor Logo" />
+
+      <div className="login-container">
+        <div className='login-form'>
+          <div className='logo-img'>
+            <img src={logo} alt="Taugor Logo" />
+          </div>
+
+          <Input
+            type="email"
+            label="Email"
+            placeholder="Digite seu email"
+            value={email}
+            onChange={(e) => { setEmail(e.target.value); handleInputChange('email'); }}
+            onBlur={(e) => handleInputBlur('email', e)}
+          />
+
+          <Input
+            type="password"
+            label="Senha"
+            placeholder="Digite sua senha"
+            value={password}
+            onChange={(e) => { setPassword(e.target.value); handleInputChange('password'); }}
+            onBlur={(e) => handleInputBlur('password', e)}
+          />
+
+          <p className="error-message">
+            ㅤ
+            {errorMessage && errorMessage}
+            {errors.email && errors.email}
+            {errors.password && errors.password}
+            ㅤ
+          </p>
+
+          <Button onClick={handleSignIn} loading={loading}>Entrar</Button>
+
+
         </div>
-
-        <Input
-          type="email"
-          label="Email"
-          placeholder="Digite seu email"
-          value={email}
-          onChange={(e) => { setEmail(e.target.value); handleInputChange('email'); }}
-          onBlur={(e) => handleInputBlur('email', e)}
-        />
-
-        <Input
-          type="password"
-          label="Senha"
-          placeholder="Digite sua senha"
-          value={password}
-          onChange={(e) => { setPassword(e.target.value); handleInputChange('password'); }}
-          onBlur={(e) => handleInputBlur('password', e)}
-        />
-
-        <p className="error-message">
-          {errorMessage && errorMessage}
-          {errors.email && errors.email}
-          {errors.password && errors.password}
-        </p>
-
-        <Button onClick={handleSignIn} loading={loading}>Entrar</Button>
-
-
       </div>
-    </div>
+    </>
   );
 };
 

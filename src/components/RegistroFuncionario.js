@@ -4,6 +4,7 @@ import FormContato from '../components/FormContato';
 import { Row, Col } from '../ui/Grid';
 import { FuncionarioViewer } from '../components/FuncionarioPDF';
 import ListaFuncionarios from './ListaFuncionarios';
+import './RegistroFuncionario.scss'
 
 const RegistroFuncionario = (uid) => {
 
@@ -34,12 +35,14 @@ const RegistroFuncionario = (uid) => {
             <ListaFuncionarios uid={uid} onFormSubmit={handleFormSubmit} onInputBlur={handleInputBlur} onModalClose={handleCloseModal} onClick={handleOpenModal} />
             <ModalComponent maxWidth='maxWidth' isOpen={isOpen} onClose={handleCloseModal} modalTitle="">
                 <Row>
-                    <Col size={6} justify="justify">
+                    <Col>
                         <FormContato uid={uid} onFormSubmit={handleFormSubmit} onInputBlur={handleInputBlur} onModalClose={handleCloseModal} />
                     </Col>
-                    <Col size={5}>
-                        <FuncionarioViewer formData={formData} />
-                    </Col>
+                    <div className='oct-pdf'>
+                        <Col>
+                            <FuncionarioViewer formData={formData} />
+                        </Col>
+                    </div>
                 </Row>
             </ModalComponent>
         </>

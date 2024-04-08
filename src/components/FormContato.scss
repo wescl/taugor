@@ -1,0 +1,34 @@
+.form-contato {
+    padding: 5px 40px 40px 40px;
+    margin-top: -20px;
+    overflow-wrap: auto;
+
+}
+
+.img-top {
+    display: none;
+}
+
+@media (max-width: 1175px) {
+
+    .form-contato {
+        padding: 5px 30px 40px 30px;
+    }
+}
+
+@media (max-width: 601px) {
+
+    .form-contato {
+        padding: 12px 15px 40px 15px;
+        overflow-wrap: auto;
+    }
+
+    .img-right {
+        display: none;
+    }
+
+    .img-top {
+        display: block;
+        margin-top: 3em;
+    }
+}

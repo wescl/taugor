@@ -8,7 +8,6 @@ import './ListaFuncionarios.scss'
 import { IoClose } from "react-icons/io5";
 import { IoMdSearch } from 'react-icons/io';
 import { IoPersonAdd } from "react-icons/io5";
-import FormHistorico from './FormHistorico';
 
 const ListaFuncionarios = ({ uid, onClick, onFormSubmit, onInputBlur, onModalClose }) => {
   const [contatos, setContatos] = useState([]);
@@ -86,7 +85,7 @@ const ListaFuncionarios = ({ uid, onClick, onFormSubmit, onInputBlur, onModalClo
 
   const fetchContatos = async () => {
     try {
-      const contatosData = await buscarContatos(nomeBusca); // Use a nova função com o nome de busca
+      const contatosData = await buscarContatos(nomeBusca);
       for (const contato of contatosData) {
         const funcionariosData = await buscarFuncionariosPorContatoId(contato.id);
         contato.funcionarios = funcionariosData;
@@ -118,7 +117,6 @@ const ListaFuncionarios = ({ uid, onClick, onFormSubmit, onInputBlur, onModalClo
       <div className='search-wrapper'>
         <button onClick={onClick}><IoPersonAdd /></button>
         <div className='input'>
-
           <div className='icon-search'>
             <IoMdSearch />
           </div>

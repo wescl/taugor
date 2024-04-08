@@ -7,7 +7,7 @@ const Select = ({ options, value, onChange, label, errorMessage }) => {
   const [isFocusedSelect, setIsFocusedSelect] = useState(false);
   const selectRef = useRef(null);
   const labelRef = useRef(null);
-  const [isFocused, setIsFocused] = useState(false);
+
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {

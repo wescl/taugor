@@ -18,7 +18,6 @@ const InputPhone = ({ value, onChange, placeholder, label, maxLength, onBlur, er
     const handlePhoneChange = (e) => {
         let inputPhone = e.target.value;
         if (maxLength && inputPhone.length > maxLength) {
-            // Limit input to 15 characters
             inputPhone = inputPhone.slice(0, maxLength);
         }
         const formattedPhone = formatPhoneNumber(inputPhone);

@@ -31,23 +31,12 @@ const Home = () => {
     return null;
   }
 
-  {
-    /*
-    <Container>
-      <RegistroFuncionario uid={currentUser.uid} />
-    </Container>
-    <button className='sair' onClick={handleSignOut}><CiLogout /></button>
-    */
-  }
-
   return (
     <>
-      
       <Container>
         <RegistroFuncionario uid={currentUser.uid} />
       </Container>
       <button className='sair' onClick={handleSignOut}><CiLogout /></button>
-      
     </>
   );
 };

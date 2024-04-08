@@ -24,7 +24,7 @@ const ItemFuncionario = ({ contato, funcionarios, handleExcluirFuncionario, hand
         <>
             <div className="item-funcionario" key={contato.id}>
                 <div className='item-img'>
-                    <img src={contato.foto} alt='img'/>
+                    <img src={contato.foto || 'https://firebasestorage.googleapis.com/v0/b/taugor-aa560.appspot.com/o/projeto%2Ffavicon-taugor.png?alt=media&token=d2259668-787e-4947-b2ec-10a4d108c1c0'} alt='Imagem'/>
                 </div>
 
                 <div className='item-info'>
@@ -39,10 +39,10 @@ const ItemFuncionario = ({ contato, funcionarios, handleExcluirFuncionario, hand
                                 </p>
 
                                 <div className='buttons'>
-                                    <button onClick={() => handleExcluirFuncionario(funcionario.id, contato.id)}><MdDelete /></button>
-                                    <button onClick={() => handleOpenModalEdicao(funcionario)}><MdEdit /></button>
-                                    <button>{handleDownloadPDF(funcionario, contato)}<FaFilePdf /></button>
-                                    <button onClick={handleAbrirModal}><FaInfo /></button>
+                                    <button className='button1' onClick={() => handleExcluirFuncionario(funcionario.id, contato.id)}><MdDelete /></button>
+                                    <button className='button1' onClick={() => handleOpenModalEdicao(funcionario)}><MdEdit /></button>
+                                    <button className='button1' >{handleDownloadPDF(funcionario, contato)}<FaFilePdf /></button>
+                                    <button className='button2' onClick={handleAbrirModal}><FaInfo /></button>
                                 </div>
                             </div>
                         ))}

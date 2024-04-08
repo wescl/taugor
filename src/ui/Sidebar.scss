@@ -1,55 +1,74 @@
 .sidebar {
-  width: 250px;
+  position: fixed;
+  max-width: 250px;
+  width: 100%;
+  min-height: 100vh;
+  max-height: 1000vh;
   height: 100%;
   background-color: var(--secondary-light2);
-  color: var(--background-black);
-  position: fixed;
-  padding: 0 20px;
-  top: 0;
-  left: 0;
+  color: #1c1c1c;
   z-index: 1;
-  border-right: 1px solid var(--secondary-light2);
-  box-shadow: rgba(0, 0, 0, 0.082) 1.95px 1.95px 2.6px;
-}
+  border-right: 2px solid var(--secondary-light);
+  margin: 0 auto;
+  box-shadow: rgba(0, 0, 0, 0.218) 0px 5px 15px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 
-.sidebar-header {
-  padding-top: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  .sidebar-header {
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
 
-  img {
-    width: 200px;
-    height: auto;
-  }
-}
-
-.sidebar-menu {
-  list-style: none;
-  padding: 0;
-  margin-top: 40px;
-}
-
-.sidebar-menu li {
-  padding: 5px 10px;
-  margin-top: 10px;
-  transition: all .3s;
-
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.096);
+    img {
+      width: 180px;
+      height: auto;
+    }
   }
 
+  .sidebar-menu {
+    list-style: none;
+    padding: 10px;
+    margin-top: 40px;
+  }
 
-}
+  .sidebar-menu li {
+    transition: all 0.3s;
+    margin-top: .5em;
 
-.sidebar-menu li a {
-  text-decoration: none;
-  color: var(--background-black);
-  display: flex;
-  i {
-    margin-top: 2px;
-    margin-right: 7px;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.041);
+    }
+
+    &.active {
+      a {
+        border-left: 3px solid var(--primary);
+        opacity: 0.8;
+        background-color: rgba(0, 0, 0, 0.041);
+        transition: all 0.1s;
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: rgb(22, 22, 22);
+      display: flex;
+      padding: 7px;
+      transition: all 0.1s;
+
+      i {
+        display: flex;
+        align-items: center;
+        margin-top: 1px;
+        margin-right: 7px;
+        color: var(--primary);
+        font-size: 18px;
+      }
+    }
   }
 }
-
-.sidebar-menu li a:hover {}

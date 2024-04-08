@@ -6,7 +6,7 @@ const Row = ({ children }) => {
 };
 
 const Col = ({ size, children, justify }) => {
-    return <div className={`col-${size} ${justify}`}>{children}</div>;
+    return <div className={`col ${justify} ${size}`}>{children}</div>;
 };
 
 export { Row, Col };

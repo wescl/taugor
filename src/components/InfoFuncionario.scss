@@ -1,4 +1,6 @@
 .info-funcionario {
+    padding: 20px;
+
     .item-img {
         position: relative;
         margin: 20px auto;
@@ -32,6 +34,7 @@
         margin-top: 2em;
         background: transparent;
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         gap: 15px;
 
@@ -43,6 +46,7 @@
             margin: 0;
             border: none;
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             justify-content: center;
             box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;

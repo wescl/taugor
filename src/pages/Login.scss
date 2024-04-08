@@ -1,3 +1,10 @@
+.email-senha {
+    position: absolute;
+    top: -.5em;
+    left: .5em;
+    z-index: 999;
+}
+
 .login-container {
     position: fixed;
     top: 50%;
@@ -8,23 +15,19 @@
     align-items: center;
     height: 100vh;
     width: 100%;
-    z-index: 999;
-    background: var(--background-light);
-
-    .email-senha{
-        position: absolute;
-        left: 2em;
-        top: 2em;
-    }
+    z-index: 997;
+    background: var(--secondary-light2);
 
     .login-form {
         position: relative;
         padding: 50px;
+        margin: 0 10px;
         border-radius: 8px;
         max-width: 600px;
         width: 100%;
         border: 1px solid var(--secondary-light);
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        background: var(--background-light);
+        box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
 
         .logo-img {
             display: flex;
@@ -47,10 +50,8 @@
         }
 
         .error-message {
-            position: absolute;
             text-align: center;
-            left: 0;
-            bottom: 20%;
+            margin: -15px;
             font-size: 14px;
             width: 100%;
             color: red;
@@ -58,4 +59,26 @@
 
     }
 
+}
+
+@media (max-width: 630px) {
+    .login-container {
+
+        .login-form {
+            padding: 20px 20px 40px 20px;
+            margin: 0 20px;
+            border-radius: 3px;
+            border: 2 solid var(--secondary-light);
+
+            .logo-img {
+
+                img {
+                    width: 210px;
+                    height: auto;
+                }
+            }
+
+        }
+
+    }
 }

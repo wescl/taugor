@@ -6,17 +6,24 @@ import Button from '../ui/Button';
 import InputDate from '../ui/InputDate';
 import Title from '../ui/Title';
 import { FaPenClip } from "react-icons/fa6";
+import CustomSnackbar from '../materialUi/CustomSnackbar';
+import FormHistorico from './FormHistorico';
+import './FormFuncionario.scss';
 
-const FormFuncionario = ({ onModalClose, funcionarioExistente, id_contato, onCancel, onFormSubmit, onInputBlur }) => {
+const FormFuncionario = ({ array, onModalClose, funcionarioExistente, id_contato, onCancel, onFormSubmit, onInputBlur }) => {
     const [cargo, setCargo] = useState(funcionarioExistente ? funcionarioExistente.cargo : '');
     const [dataAdmissao, setDataAdmissao] = useState(funcionarioExistente ? funcionarioExistente.dataAdmissao : '');
     const [setor, setSetor] = useState(funcionarioExistente ? funcionarioExistente.setor : '');
     const [salario, setSalario] = useState(funcionarioExistente ? funcionarioExistente.salario : '');
     const [errorMessage, setErrorMessage] = useState({});
     const [isLoading, setIsLoading] = useState(false);
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+
+    const [dadosFuncionario, setDadosFuncionario] = useState([]);
 
     const validarCampos = () => {
         const errors = {};
+
 
         if (!cargo.trim()) {
             errors.cargo = "O cargo é obrigatório.";
@@ -55,14 +62,17 @@ const FormFuncionario = ({ onModalClose, funcionarioExistente, id_contato, onCan
             id_contato,
         };
 
+        setDadosFuncionario([novoFuncionario])
         onFormSubmit(novoFuncionario);
 
         if (funcionarioExistente) {
             await atualizarFuncionario(funcionarioExistente.id, novoFuncionario);
+            setOpenSnackbar(true);
             onModalClose();
             setIsLoading(false);
         } else {
             await adicionarFuncionario(novoFuncionario);
+            setOpenSnackbar(true);
             onModalClose();
             setIsLoading(false);
         }
@@ -75,53 +85,58 @@ const FormFuncionario = ({ onModalClose, funcionarioExistente, id_contato, onCan
     const optionsSetor = ['TI', 'Marketing', 'Atendimento'];
 
     return (
-        <form onSubmit={handleSubmit}>
+        <div>
+            {dadosFuncionario && <FormHistorico array={array} funcionarioExistente={funcionarioExistente} dadosFuncionario={dadosFuncionario} />}
+            <CustomSnackbar open={openSnackbar} onClose={() => setOpenSnackbar(false)} message="Sucesso!" severity="success" />
             <Title title="Preencha os dados de funcionário" text="lorem lorem lorem lorem lorem lorem lorem lorem" icon={<FaPenClip />} />
 
-            <Input
-                type="text"
-                label="Cargo"
-                value={cargo}
-                onChange={(e) => setCargo(e.target.value)}
-                onBlur={(value) => handleInputBlur("cargo", value)}
-                errorMessage={errorMessage.cargo}
-                age="false"
-            />
+            <form onSubmit={handleSubmit} className='form-funcionario' >
 
-            <InputDate
-                value={dataAdmissao}
-                onChange={(value) => setDataAdmissao(value)}
-                placeholder="Data de Admissão"
-                label="Data de Admissão"
-                onBlur={(value) => onInputBlur("dataAdmissao", value)}
-                errorMessage={errorMessage.dataAdmissao}
-            />
+                <Input
+                    type="text"
+                    label="Cargo"
+                    value={cargo}
+                    onChange={(e) => setCargo(e.target.value)}
+                    onBlur={(value) => handleInputBlur("cargo", value)}
+                    errorMessage={errorMessage.cargo}
+                    age="false"
+                />
 
-            <Input
-                type="text"
-                label="Salário"
-                value={`${salario}`}
-                onChange={(e) => setSalario(e.target.value)}
-                onBlur={(value) => handleInputBlur("salario", value)}
-                errorMessage={errorMessage.salario}
-            />
+                <InputDate
+                    value={dataAdmissao}
+                    onChange={(value) => setDataAdmissao(value)}
+                    placeholder="Data de Admissão"
+                    label="Data de Admissão"
+                    onBlur={(value) => onInputBlur("dataAdmissao", value)}
+                    errorMessage={errorMessage.dataAdmissao}
+                />
 
-            <Select
-                options={optionsSetor}
-                value={setor}
-                label="Setor"
-                onChange={(selectedOption) => setSetor(selectedOption)}
-                onBlur={(value) => onInputBlur("setor", value)}
-                errorMessage={errorMessage.setor}
-            />
+                <Input
+                    type="text"
+                    label="Salário"
+                    value={`${salario}`}
+                    onChange={(e) => setSalario(e.target.value)}
+                    onBlur={(value) => handleInputBlur("salario", value)}
+                    errorMessage={errorMessage.salario}
+                />
 
-            <Button type="submit" loading={isLoading}>
-                {isLoading ? 'Carregando...' : (funcionarioExistente ? 'Atualizar Funcionário' : 'Adicionar Funcionário')}
-            </Button>
+                <Select
+                    options={optionsSetor}
+                    value={setor}
+                    label="Setor"
+                    onChange={(selectedOption) => setSetor(selectedOption)}
+                    onBlur={(value) => onInputBlur("setor", value)}
+                    errorMessage={errorMessage.setor}
+                />
 
-            {onCancel && <Button type="button" onClick={onCancel}>Cancelar</Button>}
+                <Button type="submit" loading={isLoading}>
+                    {isLoading ? 'Carregando...' : (funcionarioExistente ? 'Atualizar Funcionário' : 'Adicionar Funcionário')}
+                </Button>
 
-        </form>
+                {onCancel && <Button type="button" onClick={onCancel}>Cancelar</Button>}
+
+            </form>
+        </div>
     );
 };
 

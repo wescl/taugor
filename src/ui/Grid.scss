@@ -1,47 +1,19 @@
-$breakpoint-sm: 576px;
-$breakpoint-md: 768px;
-$breakpoint-lg: 992px;
-$breakpoint-xl: 1200px;
-
 .row {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-
-  @media (max-width: $breakpoint-sm) {
-    justify-content: flex-start; /* Ajustando o alinhamento para flex-start em telas menores */
-  }
+  margin: 0 auto;
+  padding: 0;
 }
 
 .col {
-  padding: 0 15px;
-  flex-grow: 1;
-  flex-basis: 0;
-  justify-content: center;
-
-  @media (max-width: $breakpoint-sm) {
-    padding: 0 10px;
-    flex: 0 0 100%; /* Definindo a largura total para telas menores */
-    max-width: 100%;
-  }
+  min-width: 250px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.justify {
-  padding: 0 50px;
-
-  @media (max-width: $breakpoint-sm) {
-    padding: 0 20px; /* Reduzindo o padding em telas menores */
-  }
-}
-
-@for $i from 1 through 12 {
-  .col-#{$i} {
-    flex: 0 0 #{percentage($i / 12)};
-    max-width: #{percentage($i / 12)};
-
-    @media (max-width: $breakpoint-sm) {
-      flex: 0 0 100%; /* Definindo a largura total para colunas individuais em telas menores */
-      max-width: 100%;
-    }
-  }
+.col-2 {
+  margin: 0;
+  padding: 0;
+  max-width: 250px;
+  box-sizing: border-box;
 }
